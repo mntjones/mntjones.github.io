@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Triathlon Training Log"
-date:       2018-06-05 16:23:52 +0000
+date:       2018-06-05 12:23:53 -0400
 permalink:  triathlon_training_log
 ---
 
