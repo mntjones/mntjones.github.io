@@ -1,56 +1,58 @@
 ---
 layout: post
-title:      "Rails Project: Childcare Calendar"
-date:       2018-07-11 18:58:53 +0000
+title:      "Rails Project: Book Club"
+date:       2018-07-11 14:58:53 -0400
 permalink:  rails_project_childcare_calendar
 ---
 
 
-My Ruby on Rails Final Project is called Childcare Calendar (obviously, I have no marketing flair :). This app allows a user to create a job where they will need a caregiver. A caregiver will be able to see the open jobs and accept. 
+My Ruby on Rails Final Project is called Book Club. This app is for people to review a book that was assigned to the club, see the other comments and the average rating of the book, see what the book of the month was. A User can also add a book to be read and reviewed, and edit and update their review for a previous book.
 
 ## Setup
 ### Models
 
-User Model  (Parent or Gaurdian) -
-- has a name, password (secure), email, phone number, address, and num_of_kids
+User Model   -
+- has a name, password (secure), email
+- has many reviews
+- has many books through reviews
 
-Sitter Model (Caregiver) - 
-- has a name, password (secure), email, phone number,  and hourly_rate
+Book
+- has a title, author, number of pages, genre, month assigned and year assigned
+- has methods to calculate average rating and review count
+- has many reviews
+- has many books through reviews
 
-Job - 
-- has a start_date_time, end_date_time, user_id, and sitter_id
-- has a method to calculate payment for the Sitter
+Review - 
+- has comments and rating (1 - 5)
+- belongs to User and Book
 
-### Controllers
 
-**Application** has the root path, and shows the Welcome page with Sign Up and Log In capabilities for both User and Sitter.
+### Controllers and Routes
 
-**Sessions** has the login and logout paths for both User and Sitter. At the moment, it's not DRY as much of the logic is the same, but the redirect paths and the session creation are distinct.
+**Application** has the root path, and shows the Welcome page with Sign Up and Log In capabilities for the User
 
-**Users** has the creation of new Users and the display of the current users page. The show page only allows a User to view their jobs.
+**Sessions** has the login and logout paths for the User. 
 
-**Sitters** has the creation of new Sitters and the display of the current sitters page. The show page only allows a Sitter to view their jobs.
+**Users** has the creation of new Users and the display of the current user's page, which lists their past reviews. 
 
-**Jobs** has the creation of new Jobs and displays the open jobs to the Sitters. Once an open job is claimed, it disappears from the open job page and shows up in the Sitter and User page.
+**Books** has the creation of new Books and the display of the current book's page and list of books.
+
+**Reviews** has the creation of new Reviews, editing/updating of past reviews and destroying reviews. Reviews are nested resources inside Users (edit/update/destroy) and Books (new/create).
 
 ## Using the App
-Users:
-A User would sign up or log in. They would then be redirected to their home page, which lists all of their jobs, open or claimed (past and upcoming). A User may also add a new job. If a job is open (unclaimed by a Sitter), the user may either update or delete it. A User can log out. 
 
-Sitters:
-A Sitter would sign up or log in. They would be directed to their home page, which lists all of their claimed jobs. A Sitter may also view a list of open jobs, and be allowed to claim them. Once claimed, the job would disappear from the open job page and appear on the Sitter's home page. A Sitter can log out.
+A User would sign up or log in through the Welcome page. They would then be redirected to their home page, which lists the books they've reviewed, with their comments. The User has an option to edit or delete each individual review. Each book title is a link to the Book page, where a user can view all of the comments made about the book and see the average rating. At the end of the user home page, they also have an option to view the list of books or to log out.
 
-## To be Implemented in V2
-- A check to make sure the sitter is not double booked
-- Allowed to update profile for both Sitter and User
-- Show stats ?
+The list of Books has all of the information about all of the books. At the end of the page, a user has the option to go back to the user home page, or to add a new book. Each book title is a link to the individual book page.
+
+On the book home page (for each title), a user has the option to add a review. If they have previously reviewed the book, a user would then be redirected to the edit page and allowed to update their previous review. On this page, a user can also redirect to the Book list or the user home page.
 
 ## Challenges
-One of my first challenges was figuring out the associations and which parameters belonged in which model. I began to code to get routes working, and changed things around to better suit my program. In the beginning, I had the address and phone numbers in the job model, but moved them to the User and Sitter models, as I felt they better belonged to those models.
+One of my challenges was determining what actions were going to be available on which pages. I moved things around a lot to try to get a logical flow to the pages.
 
-Another big challenge was getting the new jobs to work properly. The first issue was being able to visualize how they were to be presented, and how to get them properly assigned and showing up on the individual show pages.
+Another challenge is determining which validations I needed and to make sure they worked as expected. An example is that I need the rating of the book to be from 1-5. I misused the wording to do this check, and suddenly my reviews were no longer saving. Another difficult validation was the year assigned for the Book model. I wanted to make sure that is was a 4 digit year, beginning with 19 or 20. I was able to do some web searching to help with the regex, and check terms. One validation that I did not include, but will at a later time, is the check for proper email format.
 
 ## Summary
-This project has incorporated a lot of skills and programing logic. I feel more confident with routing and forms, and look forward to using this app for my own family! Overall, I am very pleased with this experience, as I felt it was both fun and challenging.
+This project has incorporated a lot of skills and programing logic. I feel more confident with routing and forms, and look forward to using this app! Overall, I am very pleased with this experience, as I felt it was both fun and challenging. I got some experience with some app presentation skills, such as using the "fields with errors" to show users why their form submittal failed.
 
 As I learn more and get more "professional," I'm going to need to improve presentation. I was able to do a little style with how things are presented, but no where near what a deployed web app would look like. I look forward to learning Javascript and incorporating that into my web apps. 
