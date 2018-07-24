@@ -2,7 +2,7 @@
 layout: post
 title:      "Rails Project: Book Club"
 date:       2018-07-11 14:58:53 -0400
-permalink:  rails_project_childcare_calendar
+permalink:  rails_project_book_club
 ---
 
 
